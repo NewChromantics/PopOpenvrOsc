@@ -991,5 +991,13 @@ public class UDPPacketIO
       else
         return rawSize + (4 - pad);
     }
+
+
+	public void ChangeHostname(string NewAddress)
+	{
+		this.Close ();
+		this.outIP = NewAddress;
+		this.Awake ();
+	}
   }
 //}
