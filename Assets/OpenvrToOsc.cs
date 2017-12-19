@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class OpenvrToOsc : MonoBehaviour {
 
@@ -9,11 +11,21 @@ public class OpenvrToOsc : MonoBehaviour {
 	public bool		SuffixJoystickIndex = true;
 
 	[Header("Set these strings to empty to stop them sending")]
-	public string	PositionName = "Position";
-	public string	RotationName = "Position";
-	public string	TriggerName = "Trigger";
-	public string	TouchpadAxisName = "TouchpadAxis";
-	public string	IsTrackingName = "IsTracking";
+	public StringToUiLink	PositionName = "Position";
+	public StringToUiLink	RotationName = "Position";
+	public StringToUiLink	TriggerName = "Trigger";
+	public StringToUiLink	TouchpadAxisName = "TouchpadAxis";
+	public StringToUiLink	IsTrackingName = "IsTracking";
+
+
+	void Awake()
+	{
+		PositionName.Init();
+		RotationName.Init();
+		TriggerName.Init();
+		TouchpadAxisName.Init();
+		IsTrackingName.Init();
+	}
 
 	string			GetOscName(string Name,int JoystickIndex)
 	{
@@ -35,7 +47,7 @@ public class OpenvrToOsc : MonoBehaviour {
 			var Frame = ControllerFrames [Joystick];
 			var IsTracking = Frame.Tracking;
 
-			Osc.Push (GetOscName (IsTrackingName, Joystick), IsTracking ? 1 : 0);
+			Osc.Push (GetOscName (IsTrackingName.Value, Joystick), IsTracking ? 1 : 0);
 
 			if (!IsTracking)
 				continue;
@@ -43,10 +55,10 @@ public class OpenvrToOsc : MonoBehaviour {
 			//	rotation as eulars
 			var Rotation = Frame.Rotation.eulerAngles;
 
-			Osc.Push (GetOscName (PositionName, Joystick), Frame.Position);	
-			Osc.Push (GetOscName (RotationName, Joystick), Rotation);
-			Osc.Push (GetOscName (TriggerName, Joystick), Frame.TriggerAxis);	
-			Osc.Push (GetOscName (TouchpadAxisName, Joystick), Frame.TouchpadAxis);	
+			Osc.Push (GetOscName (PositionName.Value, Joystick), Frame.Position);	
+			Osc.Push (GetOscName (RotationName.Value, Joystick), Rotation);
+			Osc.Push (GetOscName (TriggerName.Value, Joystick), Frame.TriggerAxis);	
+			Osc.Push (GetOscName (TouchpadAxisName.Value, Joystick), Frame.TouchpadAxis);	
 		}
 	}
 
