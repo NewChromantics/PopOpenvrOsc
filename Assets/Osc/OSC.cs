@@ -999,5 +999,14 @@ public class UDPPacketIO
 		this.outIP = NewAddress;
 		this.Awake ();
 	}
+
+
+	public void ChangePort(string NewPortString)
+	{
+		var NewPort = Convert.ToUInt16 (NewPortString);
+		this.Close ();
+		this.outPort = NewPort;
+		this.Awake ();
+	}
   }
 //}
