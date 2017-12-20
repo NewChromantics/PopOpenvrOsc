@@ -161,7 +161,6 @@ public class UDPPacketIO
 		{
 			Sender = new UdpClient();
 			Debug.Log("Opening OSC listener on port " + localPort);
-			
 			IPEndPoint listenerIp = new IPEndPoint(IPAddress.Any, localPort);
 			Receiver = new UdpClient(listenerIp);
 			
@@ -995,18 +994,22 @@ public class UDPPacketIO
 
 	public void ChangeHostname(string NewAddress)
 	{
+		/*
 		this.Close ();
 		this.outIP = NewAddress;
 		this.Awake ();
+		*/
 	}
 
 
 	public void ChangePort(string NewPortString)
 	{
+		/*
 		var NewPort = Convert.ToUInt16 (NewPortString);
 		this.Close ();
 		this.outPort = NewPort;
 		this.Awake ();
+		*/
 	}
   }
 //}

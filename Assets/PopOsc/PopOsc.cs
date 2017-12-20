@@ -15,6 +15,17 @@ public class OscData
 	public float[]			Values {
 		get	{ return _Values; }
 		set {
+
+			if (this._Values != null && this._Values.Length == value.Length) {
+				var a = this._Values;
+				var b = value;
+				var Same = true;
+				for (int i = 0;	i < a.Length;	i++)
+					Same = Same && (a [i] == b [i]);
+				if (Same)
+					return;
+			}
+
 			this._Values = value;
 			this.Dirty = true;
 		}
