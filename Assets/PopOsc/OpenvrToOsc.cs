@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class OpenvrToOsc : MonoBehaviour {
 
-	public PopOsc	OscOutput 	{	get{	return GameObject.FindObjectOfType<PopOsc>();}}
+	public PopOsc				OscOutput 	{	get{	return GameObject.FindObjectOfType<PopOsc>();}}
+	public ManualCalibration	Calibration {	get{	return GameObject.FindObjectOfType<ManualCalibration>();}}
 
 	public bool		SuffixJoystickIndex = true;
 
@@ -58,8 +59,9 @@ public class OpenvrToOsc : MonoBehaviour {
 
 			//	rotation as eulars
 			var Rotation = Frame.Rotation.eulerAngles;
+			var Position = Calibration.GetCalibratedPosition (Frame.Position);
 
-			Osc.Push (GetOscName (PositionName.Value, Joystick), Frame.Position);	
+			Osc.Push (GetOscName (PositionName.Value, Joystick), Position);	
 			Osc.Push (GetOscName (RotationName.Value, Joystick), Rotation);
 			Osc.Push (GetOscName (TriggerName.Value, Joystick), Frame.TriggerAxis);	
 			Osc.Push (GetOscName (TouchpadAxisName.Value, Joystick), Frame.TouchpadAxis);	

@@ -12,6 +12,10 @@ public class FakeOpenvrController : MonoBehaviour {
 	[Range(-1,3)]
 	public float	FakeY = 0;
 
+	[Range(1,100)]
+	public float	DisplayWidth = 40;
+	public float	DisplayHeight	{	get { return DisplayWidth / 2.0f; } }
+
 	void SendFrame(OpenvrControllerFrame Frame)
 	{
 		var Frames = new List<OpenvrControllerFrame> ();
@@ -23,6 +27,9 @@ public class FakeOpenvrController : MonoBehaviour {
 
 	public void TrackPosition(Vector2 uv)
 	{
+		uv.x /= DisplayWidth / 2.0f;
+		uv.y /= DisplayHeight / 2.0f;
+
 		var Frame = new OpenvrControllerFrame ();
 		Frame.Position.x = uv.x;
 		Frame.Position.y = FakeY;

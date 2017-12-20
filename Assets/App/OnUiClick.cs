@@ -18,34 +18,32 @@ IBeginDragHandler, IDragHandler, IEndDragHandler
 	public UnityEvent_uv	OnMouseDown;
 	public UnityEvent		OnMouseUp;
 
-	Vector2? NormalisePosition(Vector2 Position)
+
+
+	void OnMousePosition(PointerEventData eventData)
 	{
+		var ScreenPosition = eventData.position;
 		Vector2 uv;
-		Camera cam = null;
-		if (!RectTransformUtility.ScreenPointToLocalPointInRectangle (GetComponent<RectTransform> (), Position, cam, out uv))
-			return null;
+		var recttransform = GetComponent<RectTransform> ();
+		Camera cam = eventData.pressEventCamera;
+		if (!RectTransformUtility.ScreenPointToLocalPointInRectangle (recttransform, ScreenPosition, cam, out uv)) {
+			OnMouseUp.Invoke ();
+			return;
+		}
 		uv.y = 1 - uv.y;
 		Debug.Log (uv);
-		return uv;
-	}
 
-	void OnMousePosition(Vector2 ScreenPosition)
-	{
-		var uv = NormalisePosition (ScreenPosition);
-		if (!uv.HasValue)
-			OnMouseUp.Invoke ();
-		else
-			OnMouseDown.Invoke (uv.Value);
+		OnMouseDown.Invoke (uv);
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		OnMousePosition(eventData.position);
+		OnMousePosition(eventData);
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		OnMousePosition(eventData.position);
+		OnMousePosition(eventData);
 	}
 
 	public void OnEndDrag(PointerEventData eventData)
@@ -60,7 +58,7 @@ IBeginDragHandler, IDragHandler, IEndDragHandler
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		OnMousePosition(eventData.position);
+		OnMousePosition(eventData);
 		//Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.name + this.name);
 	}
 

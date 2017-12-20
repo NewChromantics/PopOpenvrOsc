@@ -25,13 +25,13 @@ Material:
     m_Floats:
     - BoundsLineWidth: 0.21
     - DisplayHeight: 9.6
-    - DisplayWidth: 33.3
-    - PlayerRadius: 2
+    - DisplayWidth: 40
+    - PlayerRadius: 0.5
     m_Colors:
-    - BoundsBottomLeft: {r: -1.9506124, g: 0, b: 4.704314, a: 0}
-    - BoundsBottomRight: {r: 5.8117533, g: 0, b: 2.7689388, a: 0}
+    - BoundsBottomLeft: {r: -4.9824605, g: 0, b: 4.944932, a: 0}
+    - BoundsBottomRight: {r: 8.60168, g: 0, b: 1.5580254, a: 0}
     - BoundsLineColour: {r: 1, g: 1, b: 0, a: 1}
-    - BoundsTopLeft: {r: -4.6117535, g: 0, b: -5.968939, a: 0}
-    - BoundsTopRight: {r: 3.1506124, g: 0, b: -7.904314, a: 0}
+    - BoundsTopLeft: {r: -7.4016795, g: 0, b: -4.758025, a: 0}
+    - BoundsTopRight: {r: 6.182461, g: 0, b: -8.144932, a: 0}
     - PlayerDisabledColour: {r: 1, g: 0, b: 0, a: 1}
     - PlayerEnabledColour: {r: 0, g: 1, b: 0, a: 1}

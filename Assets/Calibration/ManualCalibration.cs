@@ -53,6 +53,21 @@ public class ManualCalibration : MonoBehaviour {
 		return Transform;
 	}
 
+	public Vector3 		GetCalibratedPosition(Vector3 OriginalPosition)
+	{
+		var Transform = GetTransformPositionMatrix ().inverse;
+		var NormalisedPosition = Transform.MultiplyPoint (OriginalPosition);
+
+		//	gr: this should be in the matrix
+		//	convert from min/max to 0..1
+		NormalisedPosition.x /= Width;
+		NormalisedPosition.z /= Depth;
+		NormalisedPosition.x += 0.5f;
+		NormalisedPosition.z += 0.5f;
+
+		return NormalisedPosition;
+	}
+
 	public Vector3[]		GetBounds()
 	{
 		var Transform = GetTransformPositionMatrix ();
