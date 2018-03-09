@@ -23,15 +23,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - BorderSize: 0.1
+    - BorderSize: 0.075
     - BoundsLineWidth: 0.21
     - DisplayHeight: 9.6
     - DisplayWidth: 40
-    - EdgeSize: 0.1
-    - ObjectSize: 0.1
+    - EdgeSize: 0.043
+    - ObjectSize: 0.062
     - PlayerRadius: 0.5
     m_Colors:
-    - BackgroundColour: {r: 0, g: 0, b: 0, a: 0}
+    - BackgroundColour: {r: 1, g: 1, b: 1, a: 0}
     - BoundsBottomLeft: {r: -4.9824605, g: 0, b: 4.944932, a: 0}
     - BoundsBottomRight: {r: 8.60168, g: 0, b: 1.5580254, a: 0}
     - BoundsLineColour: {r: 1, g: 1, b: 0, a: 1}
