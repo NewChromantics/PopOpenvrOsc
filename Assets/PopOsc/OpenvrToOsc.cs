@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class OpenvrToOsc : MonoBehaviour {
 
 	public PopOsc				OscOutput 	{	get{	return GameObject.FindObjectOfType<PopOsc>();}}
-	public ManualCalibration	Calibration {	get{	return GameObject.FindObjectOfType<ManualCalibration>();}}
+	public NormalisedCalibration	Calibration {	get{	return GameObject.FindObjectOfType<NormalisedCalibration>();}}
 
 	public bool		SuffixJoystickIndex = true;
 
@@ -57,14 +57,22 @@ public class OpenvrToOsc : MonoBehaviour {
 			if (!IsTracking)
 				continue;
 
-			//	rotation as eulars
-			var Rotation = Frame.Rotation.eulerAngles;
-			var Position = Calibration.GetCalibratedPosition (Frame.Position);
+			try
+			{
+				//	rotation as eulars
+				var Rotation = Frame.Rotation.eulerAngles;
+				var Position = Calibration.GetNormalisedPosition(Frame.Position);
 
-			Osc.Push (GetOscName (PositionName.Value, Joystick), Position);	
-			Osc.Push (GetOscName (RotationName.Value, Joystick), Rotation);
-			Osc.Push (GetOscName (TriggerName.Value, Joystick), Frame.TriggerAxis);	
-			Osc.Push (GetOscName (TouchpadAxisName.Value, Joystick), Frame.TouchpadAxis);	
+				Osc.Push(GetOscName(PositionName.Value, Joystick), Position);
+				Osc.Push(GetOscName(RotationName.Value, Joystick), Rotation);
+				Osc.Push(GetOscName(TriggerName.Value, Joystick), Frame.TriggerAxis);
+				Osc.Push(GetOscName(TouchpadAxisName.Value, Joystick), Frame.TouchpadAxis);
+			}
+			catch(System.Exception e)
+			{
+				//	probably not calibrated
+				Osc.Push(GetOscName("Error", Joystick), 1);
+			}
 		}
 	}
 
